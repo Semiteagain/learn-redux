@@ -17,6 +17,7 @@ function App() {
   return (
     <div className="App">
       <PostForm />
+      <hr/>
      {post.map(item =>{
        return <div key={item.id}>
          <h1>{item.title}</h1>
