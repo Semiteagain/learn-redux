@@ -1,6 +1,10 @@
 import './App.css';
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux'
 import PostForm from './components/PostForm';
+
+const store = createStore(() => [],{}, applyMiddleware());
 
 function App() {
 
@@ -15,6 +19,7 @@ function App() {
 
 
   return (
+    <Provider store={store}>
     <div className="App">
       <PostForm />
       <hr/>
@@ -27,6 +32,7 @@ function App() {
      })}
 
     </div>
+    </Provider>
   );
 }
 
