@@ -7,6 +7,8 @@ function PostForm() {
         body : ''
     })
 
+    const [newPost, setPost] = useState([])
+
      function handleChange(e) {
          const {name, value} = e.target
          setItems((prevItem) =>{
@@ -15,6 +17,13 @@ function PostForm() {
                  [name] : value
              }
          })
+     }
+
+     const handleClick = (e) => {
+         setPost(prevPost=>{
+             return [...prevPost, newPost]
+         })
+        e.preventDefault();
      }
 
 
@@ -34,7 +43,7 @@ function PostForm() {
                 <textarea type='text' name='body' value={item.body} onChange={handleChange} />
                 </div>
                 <br/>
-                <button type="submit">Submit</button>
+                <button type="submit" onClick={handleClick}>Submit</button>
 
             </form>
         </div>
