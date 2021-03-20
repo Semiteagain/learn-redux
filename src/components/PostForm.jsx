@@ -7,7 +7,9 @@ function PostForm() {
         body : ''
     })
 
-    const [newPost, setPost] = useState([])
+    // const [post, setPost] = useState([])
+
+  
 
      function handleChange(e) {
          const {name, value} = e.target
@@ -19,19 +21,39 @@ function PostForm() {
          })
      }
 
-     const handleClick = (e) => {
-         setPost(prevPost=>{
-             return [...prevPost, newPost]
+     function submitPost(e) {
+         e.preventDefault();
+
+         const post = {
+             title : item.title,
+             body : item.body
+         };
+
+         fetch('https://jsonplaceholder.typicode.com/posts', {
+             method : 'POST',
+             headers : {
+                 'content-type' : 'application/json'
+             },
+             body : JSON.stringify(post)
          })
-        e.preventDefault();
+
+         .then(res => res.json())
+         .then(data => console.log(data))
      }
+
+
+
+        
+     
+
+
 
 
 
     return (
         <div>
             <h1>Add post</h1>
-            <form>
+            <form  onSubmit={submitPost}>
                 <div>
                     <label htmlFor="">Title</label> <br/>
                 <input type='text' name='title' value={item.title} onChange={handleChange} />
@@ -43,9 +65,11 @@ function PostForm() {
                 <textarea type='text' name='body' value={item.body} onChange={handleChange} />
                 </div>
                 <br/>
-                <button type="submit" onClick={handleClick}>Submit</button>
+                <button type="submit" >Submit</button>
 
             </form>
+
+         
         </div>
     )
 }
